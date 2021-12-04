@@ -33,7 +33,7 @@ Note that when you run the docker file, mount this repository to access the data
 The main command is following:
 
 ```bash
-python convlab/modules/e2e/multiwoz/SUMBT_LaRL/main.py --do_train \
+python convlab/modules/e2e/multiwoz/SUMBT_LaRL/main.py --do_train --do_eval \
 --data_dir $data_dir --task_name $task_name \
 --output_dir $output_dir --delex_data_dir $delex_data_dir
 ```
