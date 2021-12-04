@@ -1,0 +1,328 @@
+{
+  "sumbt_rule_template": {
+    "agent": [
+      {
+        "name": "DialogAgent",
+        "word_dst": {
+          "name": "SUMBTTracker",
+          "model_dir": "convlab/modules/word_dst/multiwoz/sumbt/eval_model"
+        },
+        "nlg": {
+          "name": "MultiwozTemplateNLG",
+          "is_user": false
+        },
+        "algorithm": {
+          "name": "ExternalPolicy",
+          "policy": {
+            "name": "RuleBasedMultiwozBot"
+          },
+          "action_pdtype": "Argmax",
+          "action_policy": "default"
+        }
+      }
+    ],
+    "env": [
+      {
+        "name": "multiwoz",
+        "user_policy": {
+          "name": "UserPolicyAgendaMultiWoz"
+        },
+        "sys_policy": {
+          "name": "RuleBasedMultiwozBot"
+        },
+        "nlu": {
+          "name": "MILU",
+          "model_file": "https://convlab.blob.core.windows.net/models/milu.tar.gz"
+        },
+        "nlg": {
+          "name": "MultiwozTemplateNLG",
+          "is_user": true
+        },
+        "max_t": 40,
+        "max_frame": 1000
+      }
+    ],
+    "meta": {
+      "distributed": false,
+      "eval_frequency": 1000,
+      "num_eval": 100,
+      "max_tick_unit": "total_t",
+      "max_trial": 1,
+      "max_session": 1,
+      "resources": {
+        "num_cpus": 1,
+        "num_gpus": 0
+      }
+    }
+  },
+  "sumbt_wdqn_template": {
+    "agent": [
+      {
+        "name": "DialogAgent",
+        "word_dst": {
+          "name": "SUMBTTracker"
+        },
+        "nlg": {
+          "name": "MultiwozTemplateNLG",
+          "is_user": false
+        },
+        "state_encoder": {
+          "name": "MultiWozStateEncoder"
+        },
+        "action_decoder": {
+          "name": "MultiWozVocabActionDecoder"
+        },
+        "algorithm": {
+          "name": "WarmUpDQN",
+          "action_pdtype": "Argmax",
+          "action_policy": "warmup_epsilon_greedy",
+          "warmup_epi": 1000,
+          "explore_var_spec": {
+            "name": "linear_decay",
+            "start_val": 0.1,
+            "end_val": 0.01,
+            "start_step": 1000,
+            "end_step": 500000
+          },
+          "gamma": 0.9,
+          "training_batch_iter": 1000,
+          "training_iter": 1,
+          "training_frequency": 300,
+          "training_start_step": 32,
+          "normalize_state": false
+        },
+        "memory": {
+          "name": "Replay",
+          "warmup_name": "Replay",
+          "batch_size": 16,
+          "max_size": 50000,
+          "use_cer": false
+        },
+        "net": {
+          "type": "MLPNet",
+          "hid_layers": [
+            100
+          ],
+          "hid_layers_activation": "relu",
+          "clip_grad_val": null,
+          "loss_spec": {
+            "name": "MSELoss"
+          },
+          "optim_spec": {
+            "name": "Adam",
+            "lr": 0.001
+          },
+          "lr_scheduler_spec": {
+            "name": "StepLR",
+            "step_size": 1000,
+            "gamma": 0.999
+          },
+          "update_type": "replace",
+          "update_frequency": 1000,
+          "polyak_coef": 0,
+          "gpu": false
+        }
+      }
+    ],
+    "env": [
+      {
+        "name": "multiwoz",
+        "action_dim": 300,
+        "observation_dim": 392,
+        "max_t": 40,
+        "max_frame": 50000,
+        "nlu": {
+          "name": "MILU",
+          "model_file": "https://convlab.blob.core.windows.net/models/milu.tar.gz"
+        },
+        "user_policy": {
+          "name": "UserPolicyAgendaMultiWoz"
+        },
+        "sys_policy": {
+          "name": "RuleBasedMultiwozBot"
+        },
+        "nlg": {
+          "name": "MultiwozTemplateNLG",
+          "is_user": true
+        }
+      }
+    ],
+    "meta": {
+      "distributed": false,
+      "num_eval": 100,
+      "eval_frequency": 2000,
+      "max_tick_unit": "total_t",
+      "max_trial": 1,
+      "max_session": 1,
+      "resources": {
+        "num_cpus": 1,
+        "num_gpus": 0
+      }
+    }
+  },
+  "sumbt_rule_template_eval": {
+    "agent": [
+      {
+        "name": "DialogAgent",
+        "word_dst": {
+          "name": "SUMBTTracker",
+          "model_dir": "convlab/modules/word_dst/multiwoz/sumbt/eval_model"
+        },
+        "nlg": {
+          "name": "MultiwozTemplateNLG",
+          "is_user": false
+        },
+        "algorithm": {
+          "name": "ExternalPolicy",
+          "policy": {
+            "name": "RuleBasedMultiwozBot"
+          },
+          "action_pdtype": "Argmax",
+          "action_policy": "default"
+        }
+      }
+    ],
+    "env": [
+      {
+        "name": "multiwoz",
+        "user_policy": {
+          "name": "UserPolicyAgendaMultiWoz"
+        },
+        "sys_policy": {
+          "name": "RuleBasedMultiwozBot"
+        },
+        "nlu": {
+          "name": "MILU",
+          "model_file": "https://convlab.blob.core.windows.net/models/milu.tar.gz"
+        },
+        "nlg": {
+          "name": "MultiwozTemplateNLG",
+          "is_user": true
+        },
+        "evaluator": {
+          "name": "MultiWozEvaluator"
+        },
+        "max_t": 40,
+        "max_frame": 1000
+      }
+    ],
+    "meta": {
+      "distributed": false,
+      "eval_frequency": 1000,
+      "num_eval": 100,
+      "max_tick_unit": "total_t",
+      "max_trial": 1,
+      "max_session": 1,
+      "resources": {
+        "num_cpus": 1,
+        "num_gpus": 0
+      }
+    }
+  },
+  "sumbt_larl-sl": {
+    "agent": [
+      {
+        "name": "DialogAgent",
+        "word_dst": {
+          "name": "SUMBTTracker"
+        },
+        "algorithm": {
+          "name": "ExternalPolicy",
+          "word_policy": {
+            "name": "LaRLWordPolicy",
+            "pretrained_folder": "2019-08-20-04-17-55-sl_cat",
+            "model_path": "sys_config_log_model/2019-08-20-04-17-55-sl_cat/36-model"
+          },
+          "action_pdtype": "Argmax",
+          "action_policy": "default"
+        }
+      }
+    ],
+    "env": [
+      {
+        "name": "multiwoz",
+        "user_policy": {
+          "name": "UserPolicyAgendaMultiWoz"
+        },
+        "sys_policy": {
+          "name": "RuleBasedMultiwozBot"
+        },
+        "nlu": {
+          "name": "MILU",
+          "model_file": "https://convlab.blob.core.windows.net/models/milu.tar.gz"
+        },
+        "nlg": {
+          "name": "MultiwozTemplateNLG",
+          "is_user": true
+        },
+        "max_t": 40,
+        "max_frame": 1000
+      }
+    ],
+    "meta": {
+      "distributed": false,
+      "eval_frequency": 1000,
+      "num_eval": 100,
+      "max_tick_unit": "total_t",
+      "max_trial": 1,
+      "max_session": 1,
+      "resources": {
+        "num_cpus": 1,
+        "num_gpus": 0
+      }
+    }
+  },
+  "sumbt_larl-rl": {
+    "agent": [
+      {
+        "name": "DialogAgent",
+        "word_dst": {
+          "name": "SUMBTTracker"
+        },
+        "algorithm": {
+          "name": "ExternalPolicy",
+          "word_policy": {
+            "name": "LaRLWordPolicy",
+            "pretrained_folder": "2019-08-20-04-17-55-sl_cat",
+            "model_path": "sys_config_log_model/2019-08-20-04-17-55-sl_cat/rl-2019-08-23-04-06-55/reward_best.model"
+          },
+          "action_pdtype": "Argmax",
+          "action_policy": "default"
+        }
+      }
+    ],
+    "env": [
+      {
+        "name": "multiwoz",
+        "user_policy": {
+          "name": "UserPolicyAgendaMultiWoz"
+        },
+        "sys_policy": {
+          "name": "RuleBasedMultiwozBot"
+        },
+        "nlu": {
+          "name": "MILU",
+          "model_file": "https://convlab.blob.core.windows.net/models/milu.tar.gz"
+        },
+        "nlg": {
+          "name": "MultiwozTemplateNLG",
+          "is_user": true
+        },
+        "max_t": 40,
+        "max_frame": 1000
+      }
+    ],
+    "meta": {
+      "distributed": false,
+      "eval_frequency": 1000,
+      "num_eval": 100,
+      "max_tick_unit": "total_t",
+      "max_trial": 1,
+      "max_session": 1,
+      "resources": {
+        "num_cpus": 1,
+        "num_gpus": 0
+      }
+    }
+  }
+}
