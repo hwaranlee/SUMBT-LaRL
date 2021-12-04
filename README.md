@@ -1,14 +1,18 @@
 
-# SUMBT LaRL
+# SUMBT+LaRL
 
 This is PyTorch implementation for [SUMBT+LaRL: Effective Multi-Domain End-to-End Neural Task-Oriented Dialog System](https://ieeexplore.ieee.org/document/9514885),
-Hwaran Lee, Seokhwan Jo, Hyungjun Kim, Sangkeun Jung, and Tae-Yoon Kim
+
+Hwaran Lee, Seokhwan Jo, Hyungjun Kim, Sangkeun Jung, and Tae-Yoon Kim,
+
 IEEE Access, 2021
 
 ## Installation
 
 This code is implemented upon [ConvLab][1]. Specifically, it requires Python 3.6, CUDA 10.1, PyTorch 1.0+, and HuggingFace 0.6.1.
+
 For convenience, Build and Run the [Dockerfile](Dockerfile) to get the environment for this implementation.
+
 Note that when you run the docker file, mount this repository to access the data and codes.
 
 ## Data preprocessing

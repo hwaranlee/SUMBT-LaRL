@@ -6,7 +6,7 @@
         "name": "ExternalPolicy",
         "e2e": {
           "name": "SUMBT_LaRL",
-          "model_dir": "model"
+          "model_dir": "models/model_estimated_2"
         },
         "action_pdtype": "Argmax",
         "action_policy": "default"
