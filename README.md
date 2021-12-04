@@ -24,7 +24,7 @@ Note that when you run the docker file, mount this repository to access the data
 	python split_dataset.py;
 	python construct_ontology.py --output_dir $output_dir;
 	```
-	Or, just unzip followings:
+	or, just unzip followings:
    - `data/multiwoz/sumbt_larl.zip`
    - `data/multiwoz/{train, val, test}.json.zip`
 
