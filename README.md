@@ -47,7 +47,7 @@ You can run the trained end-to-end models with the simulator in ConvLab with the
 $ python run.py {spec file} {spec name} {mode}
 ```
 
-For example, you can download our trained models from [Google Drive](https://drive.google.com/file/d/1NnhkQFFepxb87DZNiTiI8GG5-N6yHtQ2/view?usp=sharing) and unzip the a model inside `model` directory, then run the command.
+For example, you can download our trained models from [Google Drive](https://drive.google.com/file/d/1NnhkQFFepxb87DZNiTiI8GG5-N6yHtQ2/view?usp=sharing) and unzip the model inside `models` directory, then run the command.
 ```bash
 $ python run.py convlab/spec/sumbt_larl.json sumbt_larl eval
 ```
