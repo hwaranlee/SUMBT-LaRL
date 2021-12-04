@@ -6,8 +6,7 @@ sumbtlarl/data/
 *.tar.gz
 
 # model
-sumbtlarl/sumbtlarl_2/
-pytorch_model.bin
+:pytorch_model.bin
 
 # output
 sumbtlarl/output/
@@ -15,6 +14,7 @@ sumbtlarl/output/
 # etc
 *.txt
 *.png
+*/.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

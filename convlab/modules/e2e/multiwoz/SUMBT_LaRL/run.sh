@@ -4,8 +4,7 @@ target_slot='all'
 bert_dir='/home/hwaranlee/06_convlab/.pytorch_pretrained_bert'
 cuda=5
 
-
-data_dir='/home/hwaranlee/06_convlab/data/multiwoz/sumbt_larl_v3'
+data_dir='/home/hwaranlee/06_convlab/data/multiwoz/sumbt_larl'
 delex_data_dir='/home/hwaranlee/06_convlab/data/multiwoz/annotation/annotated_user_da_with_span_full_patchName_convai.json'
 main_dir='convlab/modules/e2e/multiwoz/SUMBT_LaRL'
 #out_dir='models-1004v4-ptr-larl'
@@ -25,11 +24,6 @@ CUDA_VISIBLE_DEVICES=$cuda python $main_dir/main.py --do_analyze --num_train_epo
 	--delex_data_dir $delex_data_dir \
 	--simple_posterior \
 	--ptr_model_dir $ptr_model_dir \
-	--tune_pi_only true --eval_level 0
-
-
-
-#	--ptr_larl_dir $ptr_larl_dir --ptr_sumbt_dir $ptr_sumbt_dir \
-	
+	--tune_pi_only true --eval_level 0	
 	
 	
