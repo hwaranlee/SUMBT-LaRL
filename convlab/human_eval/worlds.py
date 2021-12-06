@@ -270,7 +270,7 @@ class MultiWozEvalWorld(MTurkTaskWorld):
 
         self.state = deepcopy(self.goal)
 
-        # self.table_service = TableService(account_name='bapengstorage', account_key='mySOrY80JV78uyr9VVDOL2OBU31Kw9ASK/F+kcVOBTWMuSER02CFzGgjU5nQ49PBxBTIvkufNhBUDW+96SE8/w==')
+        # self.table_service = TableService(account_name='bapengstorage', account_key='')
         # self.table_entity_num = 0
         # for i in self.table_service.query_entities('MturkTableText'):
         #     print(i)
